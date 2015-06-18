@@ -48,10 +48,10 @@ public static final int	YELLOW	3
 		// TODO Auto-generated method stub
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S4);
 		
-		int colorId = sensor.getColorID();
 		
 		while(!Button.ENTER.isDown()){
 			LCD.clear();
+			int colorId = sensor.getColorID();
 			String colorName = getColorName(colorId);
 			LCD.drawString("Color Id: " + colorName, 0 , 0);
 			Delay.msDelay(1000);
