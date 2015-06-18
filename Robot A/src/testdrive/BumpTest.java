@@ -20,7 +20,7 @@ public class BumpTest {
 	static float[] sample;
 	
 	public static void main(String[] args){
-		robot = new DifferentialPilot(5.5, 14.5, leftMotor, rightMotor, true);
+		robot = new DifferentialPilot(5.5, 14.5, leftMotor, rightMotor, false);
 		robot.setTravelSpeed(30);
 		robot.setRotateSpeed(60);
 		

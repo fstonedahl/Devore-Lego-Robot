@@ -14,7 +14,7 @@ import lejos.utility.Delay;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 
-public class AvoidObjects {
+public class ChaseClosest {
 	
 	static DifferentialPilot robot;
 	static RegulatedMotor leftMotor = Motor.C;
@@ -27,7 +27,7 @@ public class AvoidObjects {
 
 	public static void main(String[] args) {
 		// Sets up Pilot for robot and sensor for robot
-		robot = new DifferentialPilot(5.5, 14.5, leftMotor, rightMotor, true);
+		robot = new DifferentialPilot(5.5, 14.5, leftMotor, rightMotor, false);
 		sensor = new EV3UltrasonicSensor(SensorPort.S1);
 		scan = new float[12];
 		beginDrive();
@@ -64,6 +64,8 @@ public class AvoidObjects {
 	public static void scanSurroundings(){
 		int count = 0;
 		while(count < 12){
+			if (Button.ENTER.isDown()) { return; }
+			
 			float temp = getDistanceMeasurement();
 			scan[count] = temp;
 			frontMotor.rotate(30);
