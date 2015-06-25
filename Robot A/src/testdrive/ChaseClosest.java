@@ -42,6 +42,9 @@ public class ChaseClosest {
 		
 		while(!Button.ENTER.isDown()){
 			scanSurroundings();
+			if (Button.ENTER.isDown()) {
+				break;
+			}
 			int index = findNearest(scan);
 			int angle = index * -30;
 			if (angle < -180) { angle += 360; }
