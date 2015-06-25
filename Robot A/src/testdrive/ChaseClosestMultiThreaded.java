@@ -26,7 +26,7 @@ public class ChaseClosestMultiThreaded {
 		robot = new DifferentialPilot(5.5, 14.5, leftMotor, rightMotor, false);
 		distanceSensor = new EV3UltrasonicSensor(SensorPort.S1);
 		sampleProvider = distanceSensor.getDistanceMode();
-		scan = new float[360/SCAN_ANGLE];
+		scan = new float[360 / SCAN_ANGLE];
 		beginDrive();
 	}
 
@@ -34,7 +34,7 @@ public class ChaseClosestMultiThreaded {
 		robot.setTravelSpeed(100);
 		robot.setAcceleration(500);
 		robot.setRotateSpeed(60.0);
-		// robot.reset();
+		robot.reset();
 		// boolean forward = true;
 
 		while (!Button.ENTER.isDown()) {
@@ -49,7 +49,7 @@ public class ChaseClosestMultiThreaded {
 			}
 			// frontMotor.rotate(index*30);
 			robot.rotate(angle);
-			robot.travel(4);
+			robot.travel(10);
 			/*
 			 * while(forward){ robot.forward(); Delay.msDelay(500); float temp =
 			 * getDistanceMeasurement(); if(temp <= 0.4){ forward = false;
@@ -60,17 +60,19 @@ public class ChaseClosestMultiThreaded {
 	}
 
 	public static void scanSurroundings() {
-		int count = 0;
-		while (count < scan.length) {
+
+		for (int i = 0; i < scan.length; i++) {
 			if (Button.ENTER.isDown()) {
 				return;
 
 			}
-			scan[count] = getDistanceMeasurement();
-			neckMotor.rotate(SCAN_ANGLE);
-			count++;
+			scan[i] = getDistanceMeasurement();
+			if (i < scan.length - 1) {
+				neckMotor.rotate(SCAN_ANGLE);
+			}
+
 		}
-		neckMotor.rotate(-360);
+		neckMotor.rotate(-360+SCAN_ANGLE);
 	}
 
 	public static int findFarthest(float[] distances) {
@@ -107,10 +109,9 @@ public class ChaseClosestMultiThreaded {
 	public static float getDistanceMeasurement() {
 		sample = new float[sampleProvider.sampleSize()];
 		sampleProvider.fetchSample(sample, 0);
-		/*
-		 * String output = "curDist: " + sample[0]; LCD.clear();
-		 * LCD.drawString(output, 0, 0); //Delay.msDelay(2000);
-		 */
+		String output = "curDist: " + sample[0];
+		LCD.clear();
+		LCD.drawString(output, 0, 0);
 
 		return sample[0];
 	}
