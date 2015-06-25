@@ -16,7 +16,7 @@ public class BumpTest {
 	static RegulatedMotor leftMotor = Motor.C;
 	static RegulatedMotor rightMotor = Motor.B;
 	static EV3TouchSensor sensor;
-	static SampleProvider sampleProvider;
+	static SampleProvider bumpSampleProvider;
 	static float[] sample;
 	
 	public static void main(String[] args){
@@ -32,9 +32,9 @@ public class BumpTest {
 	
 	public static void run(){
 		robot.forward();
-		sampleProvider = sensor.getTouchMode();
-		sample = new float[sampleProvider.sampleSize()];
-		sampleProvider.fetchSample(sample, 0);
+		bumpSampleProvider = sensor.getTouchMode();
+		sample = new float[bumpSampleProvider.sampleSize()];
+		bumpSampleProvider.fetchSample(sample, 0);
 		
 		while(!Button.ENTER.isDown()){
 			if(sample[0] == 1){
@@ -45,8 +45,8 @@ public class BumpTest {
 				robot.rotate(degree);
 				robot.forward();
 			}
-			sampleProvider = sensor.getTouchMode();
-			sampleProvider.fetchSample(sample, 0);
+			bumpSampleProvider = sensor.getTouchMode();
+			bumpSampleProvider.fetchSample(sample, 0);
 		}
 	}
 
