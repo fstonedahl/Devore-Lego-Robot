@@ -53,7 +53,7 @@ public class ChaseClosestMultiThreaded {
 			// frontMotor.rotate(index*30);
 			robot.rotate(angle);
 			robot.travel(10);
-			Delay.msDelay(1000);
+			Delay.msDelay(6000);
 			/*
 			 * while(forward){ robot.forward(); Delay.msDelay(500); float temp =
 			 * getDistanceMeasurement(); if(temp <= 0.4){ forward = false;
