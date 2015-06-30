@@ -41,15 +41,15 @@ public class SearchAndLocate {
 		robot.setTravelSpeed(20);
 		robot.setRotateSpeed(60);
 
-		while (currentColor != targetColor && !Button.ENTER.isDown()) {
-			robot.forward();			
+		robot.forward();
+		while (currentColor != targetColor && !Button.ENTER.isDown()) {			
 			Delay.msDelay(100);
 				
 			bumpSampleProvider.fetchSample(bumpSample, 0);
 			if(bumpSample[0] == 1){
 				robot.stop();
 				robot.travel(-10);
-				int degree = (rand.nextInt(180)-90);
+				int degree = (rand.nextInt(135)+45);
 				robot.rotate(degree);
 				robot.forward();
 			}
