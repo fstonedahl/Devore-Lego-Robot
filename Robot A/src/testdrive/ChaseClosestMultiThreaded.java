@@ -27,7 +27,14 @@ public class ChaseClosestMultiThreaded {
 		distanceSensor = new EV3UltrasonicSensor(SensorPort.S1);
 		sampleProvider = distanceSensor.getDistanceMode();
 		scan = new float[360 / SCAN_ANGLE];
+		for (int i = 0; i < scan.length; i++) {
+			scan[i] = 1000; // large value for things we haven't seen yet.
+		}
+		VisionRunner visionRunner = new VisionRunner(); 
+		Thread visionThread = new Thread(visionRunner);
+		visionThread.start();
 		beginDrive();
+		
 	}
 
 	public static void beginDrive() {
@@ -38,10 +45,6 @@ public class ChaseClosestMultiThreaded {
 		// boolean forward = true;
 
 		while (!Button.ENTER.isDown()) {
-			scanSurroundings();
-			if (Button.ENTER.isDown()) {
-				break;
-			}
 			int index = findNearest(scan);
 			int angle = index * -SCAN_ANGLE;
 			if (angle < -180) {
@@ -50,6 +53,7 @@ public class ChaseClosestMultiThreaded {
 			// frontMotor.rotate(index*30);
 			robot.rotate(angle);
 			robot.travel(10);
+			Delay.msDelay(1000);
 			/*
 			 * while(forward){ robot.forward(); Delay.msDelay(500); float temp =
 			 * getDistanceMeasurement(); if(temp <= 0.4){ forward = false;
@@ -72,7 +76,7 @@ public class ChaseClosestMultiThreaded {
 			}
 
 		}
-		neckMotor.rotate(-360+SCAN_ANGLE);
+		neckMotor.rotate(-360 + SCAN_ANGLE);
 	}
 
 	public static int findFarthest(float[] distances) {
@@ -117,3 +121,13 @@ public class ChaseClosestMultiThreaded {
 	}
 
 }
+
+class VisionRunner implements Runnable {
+	@Override
+	public void run() {
+		while (!Button.ENTER.isDown()) {
+			ChaseClosestMultiThreaded.scanSurroundings();
+		}
+	}
+}
+
