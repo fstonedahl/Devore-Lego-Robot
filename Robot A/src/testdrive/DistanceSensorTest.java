@@ -17,10 +17,12 @@ public class DistanceSensorTest {
 		SampleProvider sp = sensor.getDistanceMode();
 		
 		float[] sample = new float[sp.sampleSize()];
-		sp.fetchSample(sample, 0);
-		LCD.clear();
-		LCD.drawString("Distance: " + sample[0], 0, 0);
-		Delay.msDelay(5000);
+		while(!Button.ENTER.isDown()){
+			sp.fetchSample(sample, 0);
+			LCD.clear();
+			LCD.drawString("Distance: " + sample[0], 0, 0);
+			Delay.msDelay(1000);
+		}
 		/*while(!Button.ENTER.isDown()){
 			sp.fetchSample(sample, 0);
 			distance = (int)sample[0];
