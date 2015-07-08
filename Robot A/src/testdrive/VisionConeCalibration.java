@@ -20,8 +20,11 @@ public class VisionConeCalibration {
 		SampleProvider sp = sensor.getDistanceMode();
 		
 		float[] sample = new float[sp.sampleSize()];
+		int lineDistance = 30;
 		
-		LCD.drawString("Push button to start/end data collection", 0, 4);
+		LCD.drawString("Place robot at " + lineDistance + "cm", 0, 2);
+		LCD.drawString("Push button to", 0, 4);
+		LCD.drawString("start/end sensing", 0, 5);
 		
 		while(!Button.ENTER.isDown()){
 			Delay.msDelay(10);
@@ -32,13 +35,13 @@ public class VisionConeCalibration {
 			sp.fetchSample(sample, 0);
 			float distance = sample[0];
 			sightRangeData.add(distance);
-			Delay.msDelay(100);
+			Delay.msDelay(10);
 		}
 		
 		try {
-			PrintWriter out = new PrintWriter(new FileWriter("output.txt"));
+			PrintWriter out = new PrintWriter(new FileWriter("range_data_"+lineDistance+".txt"));
 			for (int i = 0; i < sightRangeData.size(); i++){
-				out.printf("%.2f%n", i);
+				out.printf("%.2f\n", sightRangeData.get(i));
 			}
 			out.close();
 			
