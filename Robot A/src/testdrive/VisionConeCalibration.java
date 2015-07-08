@@ -29,6 +29,10 @@ public class VisionConeCalibration {
 		while(!Button.ENTER.isDown()){
 			Delay.msDelay(10);
 		}
+		// wait for the button to come back up
+		while(Button.ENTER.isDown()){
+			Delay.msDelay(10);
+		}
 
 		ArrayList<Float> sightRangeData = new ArrayList<Float>();
 		while(!Button.ENTER.isDown()){
