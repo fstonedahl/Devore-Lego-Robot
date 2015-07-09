@@ -12,8 +12,6 @@ public class PilotTesting {
 		RegulatedMotor rightMotor = Motor.B;
 		
 		robot = new DifferentialPilot(5.5, 15, leftMotor, rightMotor, true);
-		robot.setTravelSpeed(100);
-		robot.setAcceleration(800);
 		robot.setRotateSpeed(60.0);
 		robot.reset();
 		robot.rotate(-90);
