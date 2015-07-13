@@ -35,8 +35,8 @@ public class ChaseClosest {
 	
 	public static void beginDrive(){
 		robot.setTravelSpeed(100);
-		robot.setAcceleration(500);
-		robot.setRotateSpeed(60.0);
+		robot.setAcceleration(50);
+		robot.setRotateSpeed(30.0);
 		robot.reset();
 		boolean forward = true;
 		
@@ -50,7 +50,7 @@ public class ChaseClosest {
 			if (angle < -180) { angle += 360; }
 			//frontMotor.rotate(index*30);
 			robot.rotate(angle);
-			robot.travel(4);
+			robot.travel(10);
 			/*while(forward){
 				robot.forward();
 				Delay.msDelay(500);
