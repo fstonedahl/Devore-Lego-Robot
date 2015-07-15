@@ -46,9 +46,9 @@ public class DistanceCalibration {
 		}
 	}
 	// }*/
-		robot.setTravelSpeed(20);
-		robot.setAcceleration(10);
-		robot.setRotateSpeed(10);
+		robot.setTravelSpeed(30);
+		robot.setAcceleration(60);
+		robot.setRotateSpeed(60);
 		robot.reset();
 		//boolean forward = true;
 		int i = 0; 

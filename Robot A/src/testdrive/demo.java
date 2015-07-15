@@ -30,9 +30,9 @@ public class demo {
 	public static void main(String[] args) {
 		// Sets up Pilot for robot and sensor for robot
 		robot = new DifferentialPilot(5.4, 14.5, leftMotor, rightMotor, false);
-		robot.setTravelSpeed(60);
-		robot.setAcceleration(30);
-		robot.setRotateSpeed(30);
+		robot.setTravelSpeed(30);
+		robot.setAcceleration(120);
+		robot.setRotateSpeed(60);
 		robot.reset();
 		
 		sensor = new EV3TouchSensor(SensorPort.S2);
@@ -60,8 +60,9 @@ public class demo {
 				bumpSampleProvider = sensor.getTouchMode();
 				bumpSampleProvider.fetchSample(sample, 0);
 			}
-			Sound.beepSequenceUp();
 			robot.stop();
+			Sound.beepSequenceUp();
+			
 		}
 }
 
