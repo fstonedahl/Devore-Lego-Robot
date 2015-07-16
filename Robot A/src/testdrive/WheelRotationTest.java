@@ -17,11 +17,22 @@ public class WheelRotationTest {
 		 * Delay.msDelay(9000); angle = angle + 20; } rotate = rotate + 20;
 		 * while (!Button.ESCAPE.isDown()) { Delay.msDelay(10); } }
 		 */
+		
+		
+		/*
 		int rotate = 60;
 		int angle = 30;
 		for (int i = 0; i < 6; i++) {
 			turn (angle, rotate);
 			angle = angle + 30;
+			while (!Button.ENTER.isDown()) {
+				Delay.msDelay(10);
+			}
+		}
+		*/
+		
+		for (int i = 0; i < 10; i++) {
+			turn (90, 60);
 			while (!Button.ENTER.isDown()) {
 				Delay.msDelay(10);
 			}
