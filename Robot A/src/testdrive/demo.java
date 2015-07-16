@@ -36,8 +36,7 @@ public class demo {
 		robot.reset();
 		
 		sensor = new EV3TouchSensor(SensorPort.S2);
-		SampleProvider sp = sensor.getTouchMode();
-		 sensorColor = new EV3ColorSensor(SensorPort.S4);
+		sensorColor = new EV3ColorSensor(SensorPort.S4);
 		 
 		 run();
 	}

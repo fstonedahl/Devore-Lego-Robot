@@ -25,7 +25,6 @@ public class BumpTest {
 		robot.setRotateSpeed(60);
 		
 		sensor = new EV3TouchSensor(SensorPort.S2);
-		SampleProvider sp = sensor.getTouchMode();
 		
 		run();
 	}
