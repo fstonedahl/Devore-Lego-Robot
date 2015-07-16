@@ -59,7 +59,7 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			//looking for white
 			while(sensorColor.getColorID() != 6&&!Button.ENTER.isDown()){
 				scanSurroundings();
-				int index = findNearest(scan);
+				int index = findFarthest(scan);
 				int angle = (index* -30) + 180;
 				robot.rotate(angle);
 				robot.travel(40, true);
@@ -101,6 +101,23 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			for(int i = 0; i < distances.length; i++){
 				if(distances[i] <= minDistance){
 					minDistance = distances[i];
+					index = i;
+				}
+			}	
+			return index;
+		}
+		public static int findFarthest(float[] distances){
+			float maxDistance = 0;
+			int index = 0;
+			String output = "";
+			
+			for(int i = 0; i < distances.length; i++){
+				output = i + ": "+ distances[i];
+				LCD.clear();
+				LCD.drawString(output, 0, 0);
+				Delay.msDelay(2000);
+				if(distances[i] >= maxDistance){
+					maxDistance = distances[i];
 					index = i;
 				}
 			}	
