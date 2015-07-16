@@ -109,13 +109,10 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 		public static int findFarthest(float[] distances){
 			float maxDistance = 0;
 			int index = 0;
-			String output = "";
+			
 			
 			for(int i = 0; i < distances.length; i++){
-				output = i + ": "+ distances[i];
-				LCD.clear();
-				LCD.drawString(output, 0, 0);
-				Delay.msDelay(2000);
+				
 				if(distances[i] >= maxDistance){
 					maxDistance = distances[i];
 					index = i;
