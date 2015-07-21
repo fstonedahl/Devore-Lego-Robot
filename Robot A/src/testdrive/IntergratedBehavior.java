@@ -74,12 +74,16 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 						Random r = new Random();
 						int degree = (r.nextInt(135)+45);
 						robot.rotate(degree);
-					}					
+					}
+					if (sensorColor.getColorID() == 6){
+						break;
+					}
 				}
 			}
 			robot.stop();
+			Button.LEDPattern(4);
 			Sound.beepSequenceUp();
-			
+			Sound.beepSequence();
 		}
 		
 	
@@ -114,9 +118,9 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			int index = 0;	
 			for(int i = 0; i < distances.length; i++){
 				if(distances[0]>0.5){
-					return index = 0;
+					return  0;
 				}else if(Double.isInfinite(distances[i])){
-					return index = i;
+					return  i;
 				}else if(distances[i] >= maxDistance){
 					maxDistance = distances[i];
 					index = i;
