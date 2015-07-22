@@ -48,6 +48,15 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			robot.setRotateSpeed(60);
 			robot.reset();
 			
+			LCD.clear();
+			LCD.drawString("ENTER delays, others GO!", 0, 0);
+			while (!Button.ENTER.isDown() && !Button.DOWN.isDown() ) {
+				Delay.msDelay(10);
+			}
+			if (Button.ENTER.isDown()) {
+				Delay.msDelay(3000);
+			}
+			Delay.msDelay(1000);
 			run();
 		}
 		
@@ -133,9 +142,9 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			distanceSampleProvider = sensor.getDistanceMode();
 			distanceSample = new float[distanceSampleProvider.sampleSize()];
 			distanceSampleProvider.fetchSample(distanceSample, 0);
-			String output = "curDist: " + distanceSample[0];
-			LCD.clear();
-			LCD.drawString(output, 0, 0);
+//			String output = "curDist: " + distanceSample[0];
+//			LCD.clear();
+//			LCD.drawString(output, 0, 0);
 			//Delay.msDelay(2000);
 			
 			return distanceSample[0];
