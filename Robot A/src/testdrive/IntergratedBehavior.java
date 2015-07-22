@@ -48,6 +48,15 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			robot.setRotateSpeed(60);
 			robot.reset();
 			
+			LCD.clear();
+			LCD.drawString("ENTER delays, others GO!", 0, 0);
+			while (!Button.ENTER.isDown() && !Button.DOWN.isDown() ) {
+				Delay.msDelay(10);
+			}
+			if (Button.ENTER.isDown()) {
+				Delay.msDelay(3000);
+			}
+			Delay.msDelay(1000);
 			run();
 		}
 		
@@ -59,8 +68,11 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			//looking for white
 			while(sensorColor.getColorID() != 6&&!Button.ENTER.isDown()){
 				scanSurroundings();
-				int index = findNearest(scan);
-				int angle = (index* -30) + 180;
+				int index = findFarthest(scan);
+				//int angle = (index* -30) + 180;  ; goes away from the index (opposite direction)
+
+				int angle = (index* -30);   // goes towards index
+				if (angle < -180) { angle += 360; }
 				robot.rotate(angle);
 				robot.travel(40, true);
 				while (robot.isMoving()) {
@@ -71,12 +83,16 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 						Random r = new Random();
 						int degree = (r.nextInt(135)+45);
 						robot.rotate(degree);
-					}					
+					}
+					if (sensorColor.getColorID() == 6){
+						break;
+					}
 				}
 			}
 			robot.stop();
+			Button.LEDPattern(4);
 			Sound.beepSequenceUp();
-			
+			Sound.beepSequence();
 		}
 		
 	
@@ -106,14 +122,29 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			}	
 			return index;
 		}
+		public static int findFarthest(float[] distances){
+			float maxDistance = 0;
+			int index = 0;	
+			for(int i = 0; i < distances.length; i++){
+				if(distances[0]>1){
+					return  0;
+				}else if(Double.isInfinite(distances[i])){
+					return  i;
+				}else if(distances[i] >= maxDistance){
+					maxDistance = distances[i];
+					index = i;
+				}
+			}	
+			return index;
+		}
 		
 		public static float getDistanceMeasurement(){
 			distanceSampleProvider = sensor.getDistanceMode();
 			distanceSample = new float[distanceSampleProvider.sampleSize()];
 			distanceSampleProvider.fetchSample(distanceSample, 0);
-			String output = "curDist: " + distanceSample[0];
-			LCD.clear();
-			LCD.drawString(output, 0, 0);
+//			String output = "curDist: " + distanceSample[0];
+//			LCD.clear();
+//			LCD.drawString(output, 0, 0);
 			//Delay.msDelay(2000);
 			
 			return distanceSample[0];
