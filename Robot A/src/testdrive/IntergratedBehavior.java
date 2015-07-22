@@ -117,7 +117,7 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			float maxDistance = 0;
 			int index = 0;	
 			for(int i = 0; i < distances.length; i++){
-				if(distances[0]>0.5){
+				if(distances[0]>1){
 					return  0;
 				}else if(Double.isInfinite(distances[i])){
 					return  i;
