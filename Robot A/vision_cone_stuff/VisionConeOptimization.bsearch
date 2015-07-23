@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
+<search>
+<bsearchVersionNumber>1.00</bsearchVersionNumber>
+<modelInfo>
+<modelFile>/home/forrest/git/TeamRobotsSummer2015/Robot A/VisionCone_Helper_Temp_Probabilities.nlogo</modelFile>
+<modelSetupCommands>setup</modelSetupCommands>
+<modelStepCommands>update</modelStepCommands>
+<modelStopCondition/>
+<modelStepLimit>1</modelStepLimit>
+<modelMetricReporter>total-error</modelMetricReporter>
+<modelMeasureIf>true</modelMeasureIf>
+</modelInfo>
+<fitnessInfo>
+<fitnessMinimized>true</fitnessMinimized>
+<fitnessCollecting>AT_FINAL_STEP</fitnessCollecting>
+<fitnessSamplingReplications>1</fitnessSamplingReplications>
+<fitnessCombineReplications>MEAN</fitnessCombineReplications>
+</fitnessInfo>
+<searchSpace>
+<paramSpec>["turret-adjust" [-3 0.5 3]]</paramSpec>
+<paramSpec>["vision-angle1" [10 1 120]]</paramSpec>
+<paramSpec>["vision-dist1" 25]</paramSpec>
+<paramSpec>["vision-angle2" [0 1 120]]</paramSpec>
+<paramSpec>["vision-dist2" [0 0.5 25]]</paramSpec>
+<paramSpec>["vision-angle3" [0 1 120]]</paramSpec>
+<paramSpec>["vision-dist3" [0 0.5 25]]</paramSpec>
+<paramSpec>["v1?" true]</paramSpec>
+<paramSpec>["v2?" true]</paramSpec>
+<paramSpec>["v3?" true]</paramSpec>
+<paramSpec>["seen-chance1" [10 5 100]]</paramSpec>
+<paramSpec>["seen-chance2" [10 5 100]]</paramSpec>
+<paramSpec>["seen-chance3" [10 5 100]]</paramSpec>
+</searchSpace>
+<searchMethod type="StandardGA">
+<searchMethodParameter name="mutation-rate" value="0.02"/>
+<searchMethodParameter name="population-size" value="25"/>
+<searchMethodParameter name="tournament-size" value="3"/>
+<searchMethodParameter name="population-model" value="generational"/>
+<searchMethodParameter name="crossover-rate" value="0.5"/>
+</searchMethod>
+<chromosomeRepresentation type="MixedTypeChromosome"/>
+<caching>true</caching>
+<evaluationLimit>500</evaluationLimit>
+<bestCheckingNumReplications>0</bestCheckingNumReplications>
+</search>
