@@ -20,7 +20,7 @@ import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 
 	
-	public class IntergratedBehavior {
+	public class IntergratedBehaviorJuly22 {
 		static DifferentialPilot robot;
 		static RegulatedMotor leftMotor = Motor.C;
 		static RegulatedMotor rightMotor = Motor.B;
@@ -34,8 +34,6 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 		static float[] scan;
 		static float[] distanceSample;
 		static float[] bumpSample;
-		
-		static long startTimeMillis;
 
 		public static void main(String[] args) {
 			// Sets up Pilot for robot and sensor for robot
@@ -51,18 +49,14 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 			robot.reset();
 			
 			LCD.clear();
-			LCD.drawString("ENTER delay", 0,0);
-			LCD.drawString("DOWN goes now", 0, 1);
-			
+			LCD.drawString("ENTER delays, others GO!", 0, 0);
 			while (!Button.ENTER.isDown() && !Button.DOWN.isDown() ) {
 				Delay.msDelay(10);
 			}
 			if (Button.ENTER.isDown()) {
 				Delay.msDelay(3000);
 			}
-			LCD.clear();
-			Delay.msDelay(2000);
-			startTimeMillis = System.currentTimeMillis();
+			Delay.msDelay(1000);
 			run();
 		}
 		
@@ -96,17 +90,9 @@ import lejos.hardware.sensor.EV3UltrasonicSensor;
 				}
 			}
 			robot.stop();
-			int secondsElapsed = (int) ((System.currentTimeMillis() - startTimeMillis) / 1000);
-			int mins = secondsElapsed / 60;
-			int secs = secondsElapsed % 60;
-			LCD.clear();
-			LCD.drawString("Time: ", 0, 0);
-			LCD.drawString(mins + ":" + secs, 1, 2);
 			Button.LEDPattern(4);
 			Sound.beepSequenceUp();
 			Sound.beepSequence();
-			Button.waitForAnyPress();
-			
 		}
 		
 	
